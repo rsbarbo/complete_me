@@ -1,13 +1,15 @@
 class Node
 
-attr_accessor :children,
+attr_accessor :linked,
               :is_word,
-              :value
+              :value,
+              :weight
 
 def initialize
-  @children = {}
+  @linked = {}
   @is_word = false
   @value = ""
+  @weight = Hash.new(0)
 end
 
 
