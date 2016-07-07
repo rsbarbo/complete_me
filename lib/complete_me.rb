@@ -31,9 +31,9 @@ class CompleteMe
     search_matches(word_chars, node)
   end
 
-  def select(abrev_input, word)
-    @relevant = node.selected_word[abrev_input] = word
-  end
+  # def select(abrev_input, word)
+  #   node.selected_word[abrev_input] = word
+  # end
 
   def insert_word(word)
     current_node = node
@@ -46,7 +46,6 @@ class CompleteMe
     @counter += 1 unless current_node.is_word
     current_node.is_word = true
     current_node.value = value
-    @weight += 1 while (current_node.is_word && current_node.value == @relevant)
   end
 
   def search_matches(word_chars, current_node)
@@ -69,13 +68,27 @@ class CompleteMe
   end
 
   def check_relevance(list)
-    node.selected_word.values.each do |word|
+    node.weight.each do |word, weight|
       if list.include?(word)
-        list.delete(word)
+        list.delete(word) #all good up to here
       end
       list.unshift(word)
     end
     list
+  end
+
+  def select(abrev_input, word)
+    if node.weight[word] == 0
+      node.weight[word] = 1
+    elsif node.weight[word] > 0
+      node.weight[word] += 1
+    end
+    suggestions = node.weight
+    select_organizer(suggestions)
+  end
+
+  def select_organizer(suggestions)
+    suggestions
   end
 
 end
