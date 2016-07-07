@@ -20,6 +20,21 @@ class CompleteMe
     insert_word(word)
   end
 
+  def populate(words)
+    words.split("\n").each do |word|
+      insert(word)
+    end
+  end
+
+  def suggest(input)
+    word_chars = input.chars
+    search_matches(word_chars, node)
+  end
+
+  def select(abrev_input, word)
+    relevant = node.selected_word[abrev_input] = word
+  end
+
   def insert_word(word)
     current_node = node
     value = ""
@@ -31,17 +46,6 @@ class CompleteMe
     @counter += 1 unless current_node.is_word
     current_node.is_word = true
     current_node.value = value
-  end
-
-  def populate(words)
-    words.split("\n").each do |word|
-      insert(word)
-    end
-  end
-
-  def suggest(input)
-    word_chars = input.chars
-    search_matches(word_chars, node)
   end
 
   def search_matches(word_chars, current_node)
@@ -64,17 +68,13 @@ class CompleteMe
   end
 
   def check_relevance(list)
-    node.weight.values.each do |word|
+    node.selected_word.values.each do |word|
       if list.include?(word)
         list.delete(word)
       end
       list.unshift(word)
     end
     list
-  end
-
-  def select(abrev_input, word)
-    relevant = node.weight[abrev_input] = word
   end
 
 end

@@ -14,7 +14,7 @@ class CompleteMeTest < Minitest::Test
   def test_node_class_exist
     assert(Node)
   end
-  def test_complete_me_class_exist
+  def test_complete_me_class_ex3ist
     assert(CompleteMe)
   end
 
@@ -81,6 +81,10 @@ class CompleteMeTest < Minitest::Test
       assert_equal 1, cm.count
       cm.populate(large_word_list)
       assert_equal 235886,cm.count
+  end
+
+  def test_word_weight_for_return
+    # assert_equal "", cm.#whatever methd you need to call heres
   end
 
   def insert_words(words)
