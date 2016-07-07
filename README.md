@@ -159,6 +159,7 @@ Please make sure that, before your evaluation, your project has each of the foll
 * SimpleCov reporting accurate test coverage statistics
 * TravisCI running your all your tests and they all pass
 * CodeClimate evaluating the quality of your code (best to set it up early to see the change over time)
+<<<<<<< HEAD
 
 ## Supporting Features
 
@@ -175,6 +176,24 @@ That is, we want to make sure that when `select`ing a given word,
 that selection is only counted toward subsequent suggestions against
 the same substring. Here's an example:
 
+=======
+
+## Supporting Features
+
+In addition to the base features included above, you must choose **one** of the following to implement:
+
+### 1. Substring-Specific Selection Tracking
+
+A simple approach to tracking selections would be to simply
+"count" the number of times a given word is selected
+(e.g. "pizza" - 4 times, etc). But a more sophisticated solution
+would allow us to track selection information _per completion string_.
+
+That is, we want to make sure that when `select`ing a given word,
+that selection is only counted toward subsequent suggestions against
+the same substring. Here's an example:
+
+>>>>>>> b847e85d101413bfa02a98aeefb0477ebeb3fbe7
 ```
 require "./lib/complete_me"
 
@@ -202,8 +221,17 @@ completion.suggest("pi")
 In this example, against the substring "piz" we choose
 "pizzeria" 3 times, making it the dominant choice for this
 substring.
+<<<<<<< HEAD
 
 However for the substring "pi", we choose "pizza" twice and
 "pizzicato" once. The previous selections of "pizzeria" against
 "piz" don't count when suggesting against "pi", so now "pizza"
 and "pizzicato" come up as the top choices.
+=======
+
+However for the substring "pi", we choose "pizza" twice and
+"pizzicato" once. The previous selections of "pizzeria" against
+"piz" don't count when suggesting against "pi", so now "pizza"
+and "pizzicato" come up as the top choices.
+
+>>>>>>> b847e85d101413bfa02a98aeefb0477ebeb3fbe7
