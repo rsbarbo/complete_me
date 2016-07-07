@@ -11,10 +11,6 @@ class CompleteMe
   end
 
   def count(current_node=node)
-    current_node.linked.each_value do |node|
-      @counter += 1 if node.is_word
-      count(node)
-    end
     @counter
   end
 
@@ -32,6 +28,7 @@ class CompleteMe
       current_node.linked[char] = Node.new unless current_node.linked.has_key?(char)
       current_node = current_node.linked[char]
     end
+    @counter += 1 unless current_node.is_word
     current_node.is_word = true
     current_node.value = value
   end
@@ -78,8 +75,6 @@ class CompleteMe
 
   def select(abrev_input, word)
     node.weight[abrev_input] = word
-    #if select include more than 1 word, will give the select words
-    #Plus one word from the dictionary, but never return more than X amount of words
   end
 
 end
