@@ -3,7 +3,7 @@ require "pry"
 
 class CompleteMe
 
-  attr_accessor :node, :counter
+  attr_accessor :node, :counter, :something
 
   def initialize
     @node = Node.new
@@ -32,7 +32,7 @@ class CompleteMe
   end
 
   def select(abrev_input, word)
-    relevant = node.selected_word[abrev_input] = word
+    @relevant = node.selected_word[abrev_input] = word
   end
 
   def insert_word(word)
@@ -46,6 +46,7 @@ class CompleteMe
     @counter += 1 unless current_node.is_word
     current_node.is_word = true
     current_node.value = value
+    @weight += 1 while (current_node.is_word && current_node.value == @relevant)
   end
 
   def search_matches(word_chars, current_node)
