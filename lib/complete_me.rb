@@ -10,7 +10,7 @@ class CompleteMe
     @counter = 0
   end
 
-  def count(current_node=node)
+  def count
     @counter
   end
 
@@ -74,7 +74,7 @@ class CompleteMe
   end
 
   def select(abrev_input, word)
-    node.weight[abrev_input] = word
+    relevant = node.weight[abrev_input] = word
   end
 
 end
