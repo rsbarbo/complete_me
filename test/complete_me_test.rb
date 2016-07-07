@@ -70,9 +70,17 @@ class CompleteMeTest < Minitest::Test
 
   def test_works_with_large_dataset
     cm.populate(large_word_list)
+    assert_equal 235886, cm.populate(large_word_list).count
     assert_equal ["doggerel", "doggereler", "doggerelism", "doggerelist", "doggerelize", "doggerelizer"], cm.suggest("doggerel").sort
     cm.select("doggerel", "doggerelist")
     assert_equal "doggerelist", cm.suggest("doggerel").first
+  end
+
+  def test_if_count_works_properly_when_insert_and_populate_is_called
+      cm.insert("pizza")
+      assert_equal 1, cm.count
+      cm.populate(large_word_list)
+      assert_equal 235886,cm.count
   end
 
   def insert_words(words)

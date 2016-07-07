@@ -10,8 +10,12 @@ class CompleteMe
     @counter = 0
   end
 
-  def count
-    counter
+  def count(current_node=node)
+    current_node.linked.each_value do |node|
+      @counter += 1 if node.is_word
+      count(node)
+    end
+    @counter
   end
 
   def insert(word)
@@ -30,7 +34,6 @@ class CompleteMe
     end
     current_node.is_word = true
     current_node.value = value
-    @counter += 1
   end
 
   def populate(words)
@@ -46,9 +49,6 @@ class CompleteMe
 
   def search_matches(word_chars, current_node)
     list = []
-    # check for suggest word
-
-
     letter = word_chars.shift
     if current_node.linked.has_key?(letter)
       search_matches(word_chars, current_node.linked[letter])
@@ -77,7 +77,9 @@ class CompleteMe
   end
 
   def select(abrev_input, word)
-    selected_word = node.weight[abrev_input] = word
+    node.weight[abrev_input] = word
+    #if select include more than 1 word, will give the select words
+    #Plus one word from the dictionary, but never return more than X amount of words
   end
 
 end
