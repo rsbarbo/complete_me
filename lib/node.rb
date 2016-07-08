@@ -1,7 +1,6 @@
 class Node
 
-  attr_accessor :linked, :is_word,
-  :value, :weight
+  attr_accessor :linked, :is_word, :value, :weight
 
   def initialize
     @linked = {}
