@@ -83,21 +83,19 @@ class CompleteMeTest < Minitest::Test
     assert_equal 235886,cm.count
   end
 
-#   def test_word_weight_for_return
-#     dictionary = File.read("/usr/share/dict/words")
-#     cm.populate(dictionary)
-#     cm.select("piz", "pizzeria")
-#     cm.select("piz", "pizzeria")
-#     cm.select("piz", "pizzeria")
-# cm.select("pi", "pizza")
-# cm.select("pi", "pizza")
-#     cm.select("pi", "pizza")
-#     cm.select("pi", "pizza")
-#     cm.select("pi", "pizzicato")
-#
-#     assert_equal ["pizzeria", "pizza", "pizzicato"], cm.suggest("piz")
-#     # assert_equal ["pizza", "pizzicato","pizzeria"], cm.suggest("pi")
-#   end
+  def test_word_weight_for_return
+    dictionary = File.read("/usr/share/dict/words")
+    cm.populate(dictionary)
+    cm.select("piz", "pizzeria")
+    cm.select("piz", "pizzeria")
+    cm.select("piz", "pizzeria")
+    cm.select("pi", "pizza")
+    cm.select("pi", "pizza")
+    cm.select("pi", "pizzicato")
+
+    assert_equal ["pizzeria", "pizza", "pizzicato", "pizzle"], cm.suggest("piz")
+    assert_equal ["pizza", "pizzicato","pizzeria"], cm.suggest("pi")
+  end
 
   def insert_words(words)
     cm.populate(words.join("\n"))

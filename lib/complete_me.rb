@@ -31,10 +31,6 @@ class CompleteMe
     search_matches(word_chars, node)
   end
 
-  # def select(abrev_input, word)
-  #   node.selected_word[abrev_input] = word
-  # end
-
   def insert_word(word)
     current_node = node
     value = ""
@@ -73,6 +69,10 @@ class CompleteMe
         list.delete(word) #all good up to here
       end
       list.unshift(word)
+      s = Hash[node.weight.sort_by { |k, v| v }.reverse].keys
+      list.each_with_index do |word, idx|
+        list[idx] = s[idx] if s[idx] != nil
+      end
     end
     list
   end
@@ -83,12 +83,6 @@ class CompleteMe
     elsif node.weight[word] > 0
       node.weight[word] += 1
     end
-    suggestions = node.weight
-    select_organizer(suggestions)
-  end
-
-  def select_organizer(suggestions)
-    suggestions
   end
 
 end
