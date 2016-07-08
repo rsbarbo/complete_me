@@ -66,12 +66,14 @@ class CompleteMe
   def check_relevance(list)
     node.weight.each do |word, weight|
       if list.include?(word)
-        list.delete(word) #all good up to here
+        list.delete(word)
       end
       list.unshift(word)
       s = Hash[node.weight.sort_by { |k, v| v }.reverse].keys
       list.each_with_index do |word, idx|
         list[idx] = s[idx] if s[idx] != nil
+        # binding.pry
+        return s if s.length >= 3
       end
     end
     list

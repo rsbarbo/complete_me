@@ -89,11 +89,12 @@ class CompleteMeTest < Minitest::Test
     cm.select("piz", "pizzeria")
     cm.select("piz", "pizzeria")
     cm.select("piz", "pizzeria")
+
     cm.select("pi", "pizza")
     cm.select("pi", "pizza")
     cm.select("pi", "pizzicato")
 
-    assert_equal ["pizzeria", "pizza", "pizzicato", "pizzle"], cm.suggest("piz")
+    assert_equal ["pizzeria", "pizza", "pizzicato"], cm.suggest("piz")
     assert_equal ["pizza", "pizzicato","pizzeria"], cm.suggest("pi")
   end
 
