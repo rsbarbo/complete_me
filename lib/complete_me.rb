@@ -36,7 +36,8 @@ class CompleteMe
     value = ""
     word.each_char do |char|
       value += char
-      current_node.linked[char] = Node.new unless current_node.linked.has_key?(char)
+      current_node.linked[char] = Node.new unless current_node.
+      linked.has_key?(char)
       current_node = current_node.linked[char]
     end
     @counter += 1 unless current_node.is_word
@@ -69,12 +70,14 @@ class CompleteMe
         list.delete(word)
       end
       list.unshift(word)
-      s = Hash[node.weight.sort_by { |k, v| v }.reverse].keys
+      selected_words = Hash[node.weight.sort_by { |k, v| v }.reverse].keys
       list.each_with_index do |word, idx|
-        list[idx] = s[idx] if s[idx] != nil
-        return list if s.length <= 2
-        return s.shift && s.push(list.first) if s != nil && list.length > 10
-        return s if s.first.include?(list.first) && list.length < 5
+        list[idx] = selected_words[idx] if selected_words[idx] != nil
+        return list if selected_words.length <= 2
+        return selected_words.shift && selected_words.push(list.first) if
+        selected_words != nil && list.length > 10
+        return selected_words if selected_words.first.
+        include?(list.first) && list.length < 5
       end
     end
     list
