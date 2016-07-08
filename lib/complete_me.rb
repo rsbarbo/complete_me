@@ -72,8 +72,9 @@ class CompleteMe
       s = Hash[node.weight.sort_by { |k, v| v }.reverse].keys
       list.each_with_index do |word, idx|
         list[idx] = s[idx] if s[idx] != nil
-        # binding.pry
-        return s if s.length >= 3
+        return list if s.length <= 2
+        return s.shift && s.push(list.first) if s != nil && list.length > 10
+        return s if s.first.include?(list.first) && list.length < 5
       end
     end
     list
