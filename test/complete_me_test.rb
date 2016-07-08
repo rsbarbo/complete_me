@@ -24,7 +24,7 @@ class CompleteMeTest < Minitest::Test
 
   def test_raises_argument_error
     assert_raises(ArgumentError) do
-      raise ArgumentError  #Fails, different Exception is raised
+      raise ArgumentError
     end
   end
 
@@ -109,6 +109,5 @@ class CompleteMeTest < Minitest::Test
   def large_word_list
     File.read("/usr/share/dict/words")
   end
-
 
 end
